@@ -1,14 +1,4 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -26,6 +16,8 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import {Api} from './Api';
 
 const Section: React.FC<{
   title: string;
@@ -61,6 +53,14 @@ const App = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  useEffect(() => {
+    const fetch = async () => {
+      const hotels = await Api.fetchHotels();
+      // console.log({hotels});
+    };
+    fetch();
+  }, []);
 
   return (
     <SafeAreaView style={backgroundStyle}>
