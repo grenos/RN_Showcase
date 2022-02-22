@@ -17,12 +17,12 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import {ApiActions} from './Storage/Redux/Actions';
-import {useAppDispatch, useAppSelector} from './Storage/Redux/Hooks';
 import {
-  getApiLoadingState,
-  getHotels,
-} from './Storage/Redux/Selectors/ApiSelectors/ApiSelectors';
+  useAppDispatch,
+  useAppSelector,
+  ApiSelectors,
+  ApiActions,
+} from '@Storage/Redux';
 
 const Section: React.FC<{
   title: string;
@@ -56,8 +56,8 @@ const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const dispatch = useAppDispatch();
-  const hotels = useAppSelector(getHotels);
-  const isHotelsLoading = useAppSelector(getApiLoadingState);
+  const hotels = useAppSelector(ApiSelectors.getHotels);
+  const isHotelsLoading = useAppSelector(ApiSelectors.getApiLoadingState);
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
