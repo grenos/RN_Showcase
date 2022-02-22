@@ -10,10 +10,6 @@ export const fetchHotels = async (): Promise<Array<IHotel>> => {
     },
   };
 
-  try {
-    const res = await fetch(url, params);
-    return res.json();
-  } catch (error: any) {
-    return error;
-  }
+  const res = await fetch(url, params);
+  return res.json();
 };

@@ -17,7 +17,12 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-import {Api} from './Api';
+import {ApiActions} from './Storage/Redux/Actions';
+import {useAppDispatch, useAppSelector} from './Storage/Redux/Hooks';
+import {
+  getApiLoadingState,
+  getHotels,
+} from './Storage/Redux/Selectors/ApiSelectors/ApiSelectors';
 
 const Section: React.FC<{
   title: string;
@@ -50,45 +55,53 @@ const Section: React.FC<{
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
+  const dispatch = useAppDispatch();
+  const hotels = useAppSelector(getHotels);
+  const isHotelsLoading = useAppSelector(getApiLoadingState);
+
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
   useEffect(() => {
-    const fetch = async () => {
-      const hotels = await Api.fetchHotels();
-      // console.log({hotels});
-    };
     fetch();
   }, []);
+
+  const fetch = () => {
+    dispatch(ApiActions.fetchHotels());
+  };
 
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+      {isHotelsLoading ? (
+        <Text>IS LOADING</Text>
+      ) : (
+        <ScrollView
+          contentInsetAdjustmentBehavior="automatic"
+          style={backgroundStyle}>
+          <Header />
+          <View
+            style={{
+              backgroundColor: isDarkMode ? Colors.black : Colors.white,
+            }}>
+            <Section title="Step One">
+              Edit <Text style={styles.highlight}>App.tsx</Text> to change this
+              screen and then come back to see your edits.
+            </Section>
+            <Section title="See Your Changes">
+              <ReloadInstructions />
+            </Section>
+            <Section title="Debug">
+              <DebugInstructions />
+            </Section>
+            <Section title="Learn More">
+              Read the docs to discover what to do next:
+            </Section>
+            <LearnMoreLinks />
+          </View>
+        </ScrollView>
+      )}
     </SafeAreaView>
   );
 };
