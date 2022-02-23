@@ -24,7 +24,6 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const dispatch = useAppDispatch();
   const hotels = useAppSelector(ApiSelectors.getHotels);
-  const isHotelsLoading = useAppSelector(ApiSelectors.getApiLoadingState);
 
   useEffect(() => {
     fetch();

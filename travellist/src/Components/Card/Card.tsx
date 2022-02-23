@@ -1,7 +1,7 @@
-import {StyleSheet, Text} from 'react-native';
+import {StyleSheet} from 'react-native';
 import React from 'react';
 import {ApiTypes} from '@Api';
-import {Flex, CustomImage} from '@Components';
+import {Flex, CustomImage, CustomText} from '@Components';
 
 type Props = {
   hotel: ApiTypes.IHotel;
@@ -11,7 +11,44 @@ const Card: React.FC<Props> = ({hotel}) => {
   return (
     <Flex direction="row" justify="flex-start" styles={s.cardContainer}>
       <CustomImage image={hotel.gallery[0]} />
-      <Text>{hotel.name}</Text>
+
+      <Flex
+        direction="column"
+        justify="center"
+        align="flex-start"
+        styles={{backgroundColor: 'red', flexGrow: 1}}>
+        <CustomText body bold>
+          {hotel.name}
+        </CustomText>
+        <Flex
+          direction="row"
+          justify="space-between"
+          align="flex-start"
+          styles={{backgroundColor: 'pink', flexGrow: 1, width: '100%'}}>
+          <CustomText body>{hotel.location.city}</CustomText>
+          <CustomText body>{hotel.price.toString()}</CustomText>
+        </Flex>
+
+        <Flex
+          direction="row"
+          justify="space-between"
+          align="flex-end"
+          styles={{backgroundColor: 'lime', flexGrow: 1, width: '100%'}}>
+          <Flex
+            direction="row"
+            justify="flex-start"
+            alignChild="flex-end"
+            styles={{
+              backgroundColor: 'blue',
+              flexGrow: 1,
+              width: '50%',
+            }}>
+            <CustomText body>{hotel.stars.toString()}</CustomText>
+            <CustomText body>{hotel.userRating.toString()}</CustomText>
+          </Flex>
+          <CustomText body>{hotel.userRating.toString()}</CustomText>
+        </Flex>
+      </Flex>
     </Flex>
   );
 };
