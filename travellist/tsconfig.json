@@ -13,7 +13,8 @@
       "@*": ["./src/*"],
       "@Storage/*": ["./src/Storage/*"],
       "@Screens/*": ["./src/Screens/*"],
-      "@Navigation/*": ["./src/Navigation/*"]
+      "@Navigation/*": ["./src/Navigation/*"],
+      "@Utils/*": ["./src/Utils/*"]
     },
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

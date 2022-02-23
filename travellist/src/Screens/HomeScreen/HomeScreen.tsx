@@ -2,7 +2,6 @@ import {
   Text,
   useColorScheme,
   FlatList,
-  View,
   ListRenderItem,
   Button,
 } from 'react-native';

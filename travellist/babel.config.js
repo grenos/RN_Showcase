@@ -9,6 +9,7 @@ module.exports = {
           '@Storage': './src/Storage',
           '@Screens': './src/Screens',
           '@Navigation': './src/Navigation',
+          '@Utils': './src/Utils',
         },
         extensions: ['.js', '.jsx', '.json', '.tsx', '.ts'],
       },
