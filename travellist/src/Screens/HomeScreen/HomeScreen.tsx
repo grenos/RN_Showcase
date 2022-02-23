@@ -4,6 +4,7 @@ import {
   FlatList,
   ListRenderItem,
   Button,
+  StyleSheet,
 } from 'react-native';
 import React, {useLayoutEffect, useEffect} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -14,7 +15,8 @@ import {
   ApiSelectors,
   ApiActions,
 } from '@Storage/Redux';
-import {IHotel} from '@Api/types';
+import {ApiTypes} from '@Api';
+import {Card} from '@Components';
 
 type Props = {} & NativeStackScreenProps<RootStackParamListApp, 'Home'>;
 
@@ -46,19 +48,24 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
     });
   }, [navigation]);
 
-  const _renderItem: ListRenderItem<IHotel> = ({item}) => (
-    <Text style={{paddingBottom: 50}} key={item.id}>
-      {item.name}
-    </Text>
+  const _renderItem: ListRenderItem<ApiTypes.IHotel> = ({item}) => (
+    <Card hotel={item} />
   );
 
   return (
     <FlatList
+      contentContainerStyle={s.Container}
       contentInsetAdjustmentBehavior="automatic"
       data={hotels}
       renderItem={_renderItem}
     />
   );
 };
+
+const s = StyleSheet.create({
+  Container: {
+    backgroundColor: 'white',
+  },
+});
 
 export default HomeScreen;

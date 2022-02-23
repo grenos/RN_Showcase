@@ -1,9 +1,8 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {IHotel} from '../../../../Api/types';
 import type {RootState} from '../../Store';
-import {Api} from '../../../../Api';
+import {Api, ApiTypes} from '@Api/index';
 
-export const fetchHotels = createAsyncThunk<IHotel[]>(
+export const fetchHotels = createAsyncThunk<ApiTypes.IHotel[]>(
   'Api/Fetch Hotels',
   async (_, thunkApi) => {
     const {ApiSlice} = thunkApi.getState() as RootState;
@@ -13,7 +12,7 @@ export const fetchHotels = createAsyncThunk<IHotel[]>(
     }
     try {
       let response = await Api.fetchHotels();
-      return response as IHotel[];
+      return response as ApiTypes.IHotel[];
     } catch (error) {
       return thunkApi.rejectWithValue(`Api Error : ${error}`);
     }

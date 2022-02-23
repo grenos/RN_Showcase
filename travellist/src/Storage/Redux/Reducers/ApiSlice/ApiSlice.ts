@@ -1,9 +1,9 @@
 import {createSlice, SerializedError} from '@reduxjs/toolkit';
-import {IHotel} from '../../../../Api/types';
+import {ApiTypes} from '@Api';
 import {ApiActions} from '../../Actions';
 
 interface ApiState {
-  hotels: IHotel[];
+  hotels: ApiTypes.IHotel[];
   error?: SerializedError;
   loading: boolean;
   currentRequestId?: string;
