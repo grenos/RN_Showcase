@@ -7,6 +7,8 @@ module.exports = {
         root: ['./src'],
         alias: {
           '@Storage': './src/Storage',
+          '@Screens': './src/Screens',
+          '@Navigation': './src/Navigation',
         },
         extensions: ['.js', '.jsx', '.json', '.tsx', '.ts'],
       },

@@ -11,7 +11,9 @@
     "moduleResolution": "node",
     "paths": {
       "@*": ["./src/*"],
-      "@Storage/*": ["./src/Storage/*"]
+      "@Storage/*": ["./src/Storage/*"],
+      "@Screens/*": ["./src/Screens/*"],
+      "@Navigation/*": ["./src/Navigation/*"]
     },
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

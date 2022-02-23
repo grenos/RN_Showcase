@@ -6,10 +6,14 @@ import {name as appName} from './app.json';
 import {store} from './src/Storage/Redux/Store.ts';
 import {Provider} from 'react-redux';
 
+import {NavigationContainer} from '@react-navigation/native';
+
 const AppWrapper = () => {
   return (
     <Provider store={store}>
-      <App />
+      <NavigationContainer>
+        <App />
+      </NavigationContainer>
     </Provider>
   );
 };
