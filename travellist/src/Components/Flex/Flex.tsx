@@ -4,6 +4,9 @@ import React from 'react';
 
 type Props = {
   children: React.ReactNode;
+  flex?: boolean;
+  flexGrow?: number;
+  wrap?: 'wrap' | 'nowrap' | 'wrap-reverse' | undefined;
   direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
   justify?:
     | 'flex-start'
@@ -20,26 +23,34 @@ type Props = {
     | 'flex-end'
     | 'center'
     | 'baseline';
+  pd?: number;
   styles?: StyleProp<ViewStyle>;
 };
 
 const Flex: React.FC<Props> = ({
   children,
-  direction = 'column',
-  justify = 'center',
-  align = 'center',
-  alignChild = 'center',
+  flex,
+  flexGrow,
+  wrap,
+  direction,
+  justify,
+  align,
+  alignChild,
+  pd,
   styles = {},
 }) => {
   return (
     <View
       style={[
         {
-          flex: 1,
+          flex: flex ? 1 : 0,
+          flexGrow: flexGrow,
+          flexWrap: wrap,
           flexDirection: direction,
           justifyContent: justify,
           alignItems: align,
           alignSelf: alignChild,
+          padding: pd,
         },
         styles,
       ]}>

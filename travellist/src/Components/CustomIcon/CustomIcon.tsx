@@ -1,14 +1,21 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {StyleProp, ViewStyle} from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
 
-const CustomIcon = () => {
-  return (
-    <View>
-      <Text>CustomIcon</Text>
-    </View>
-  );
+type Props = {
+  name: string;
+  size?: number;
+  color?: string;
+  styles?: StyleProp<ViewStyle>;
+};
+
+const CustomIcon: React.FC<Props> = ({
+  name,
+  size = 24,
+  color = '#2bbdde',
+  styles = {},
+}) => {
+  return <Icon name={name} size={size} color={color} style={styles} />;
 };
 
 export default CustomIcon;
-
-const styles = StyleSheet.create({});

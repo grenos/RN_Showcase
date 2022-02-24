@@ -1,4 +1,4 @@
-import {StyleSheet, Image} from 'react-native';
+import {Image, ImageStyle, StyleProp} from 'react-native';
 import React, {useState} from 'react';
 import FastImage from 'react-native-fast-image';
 import {Images} from '@Assets/Images';
@@ -6,19 +6,20 @@ import {ApiSelectors, useAppSelector} from '@Storage/Redux';
 
 type Props = {
   image: string;
+  styles?: StyleProp<ImageStyle> | any;
 };
 
-const CustomImage: React.FC<Props> = ({image}) => {
+const CustomImage: React.FC<Props> = ({image, styles = {}}) => {
   const [isLoadError, setIsLoadError] = useState(false);
   const isHotelsLoading = useAppSelector(ApiSelectors.getApiLoadingState);
   const onError = () => setIsLoadError(true);
 
   if (!image || isLoadError || isHotelsLoading) {
-    return <Image source={Images.placeholder} style={s.Container} />;
+    return <Image source={Images.placeholder} style={styles} />;
   } else {
     return (
       <FastImage
-        style={s.Container}
+        style={styles}
         source={{uri: image}}
         resizeMode={FastImage.resizeMode.cover}
         onError={onError}
@@ -28,12 +29,3 @@ const CustomImage: React.FC<Props> = ({image}) => {
 };
 
 export default CustomImage;
-
-const s = StyleSheet.create({
-  Container: {
-    width: 100,
-    height: 120,
-    borderBottomLeftRadius: 14,
-    borderTopLeftRadius: 14,
-  },
-});
