@@ -1,17 +1,17 @@
-import {createSlice, SerializedError} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {ApiTypes} from '@Api';
 import {ApiActions} from '../../Actions';
 
 interface ApiState {
   hotels: ApiTypes.IHotel[];
-  error?: SerializedError;
+  error?: string;
   loading: boolean;
   currentRequestId?: string;
 }
 
 const initialState: ApiState = {
   hotels: [],
-  error: {},
+  error: '',
   loading: false,
   currentRequestId: '',
 };
@@ -33,10 +33,10 @@ export const ApiSlice = createSlice({
     });
     builder.addCase(ApiActions.fetchHotels.rejected, (state, action) => {
       if (action.payload) {
-        state.error = action.error;
+        state.error = action.error.message;
       }
       state.loading = false;
-      state.error = action.error;
+      state.error = action.error.message;
       state.currentRequestId = undefined;
     });
   },

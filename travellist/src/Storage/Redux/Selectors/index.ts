@@ -1,3 +1,4 @@
 import {ApiSelectors} from './ApiSelectors';
+import {FilterSelectors} from './FilterSelectors';
 
-export {ApiSelectors};
+export {ApiSelectors, FilterSelectors};

@@ -1,5 +1,12 @@
 import {useAppDispatch, useAppSelector} from './Hooks';
-import {ApiSelectors} from './Selectors';
-import {ApiActions} from './Actions';
+import {ApiSelectors, FilterSelectors} from './Selectors';
+import {ApiActions, FilterActions} from './Actions';
 
-export {useAppDispatch, useAppSelector, ApiSelectors, ApiActions};
+export {
+  useAppDispatch,
+  useAppSelector,
+  ApiSelectors,
+  ApiActions,
+  FilterActions,
+  FilterSelectors,
+};

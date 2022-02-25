@@ -1,8 +1,9 @@
 import {configureStore} from '@reduxjs/toolkit';
-import {AppReducer} from './Reducers';
+import {ApiReducer, FilterReducer} from './Reducers';
 
 const reducer = {
-  ApiSlice: AppReducer,
+  ApiSlice: ApiReducer,
+  FilterSlice: FilterReducer,
 };
 
 export const store = configureStore({

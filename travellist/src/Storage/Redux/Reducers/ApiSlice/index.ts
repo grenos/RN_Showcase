@@ -1,3 +1,3 @@
-import AppReducer from './ApiSlice';
+import ApiReducer from './ApiSlice';
 
-export {AppReducer};
+export {ApiReducer};

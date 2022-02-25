@@ -14,7 +14,7 @@ export const fetchHotels = createAsyncThunk<ApiTypes.IHotel[]>(
       let response = await Api.fetchHotels();
       return response as ApiTypes.IHotel[];
     } catch (error) {
-      return thunkApi.rejectWithValue(`Api Error : ${error}`);
+      return thunkApi.rejectWithValue('Generic Api Error');
     }
   },
 );
