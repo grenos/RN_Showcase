@@ -3,13 +3,13 @@ import {ApiTypes} from '@Api';
 import {FilterActions} from '../../Actions';
 
 interface FilterState {
-  searchedHotels: ApiTypes.IHotel[];
+  filteredHotels: ApiTypes.IHotel[];
   starsToFilter: number;
   isFlterActive: boolean;
 }
 
 const initialState: FilterState = {
-  searchedHotels: [],
+  filteredHotels: [],
   starsToFilter: 0,
   isFlterActive: false,
 };
@@ -19,7 +19,7 @@ export const FilterSlice = createSlice({
   initialState,
   reducers: {
     resetFilterState: state => {
-      state.searchedHotels = [];
+      state.filteredHotels = [];
       state.starsToFilter = 0;
       state.isFlterActive = false;
     },
@@ -35,16 +35,9 @@ export const FilterSlice = createSlice({
 
   extraReducers: builder => {
     builder.addCase(
-      FilterActions.setSearchedHotels.fulfilled,
-      (state, action) => {
-        state.searchedHotels = action.payload;
-      },
-    );
-
-    builder.addCase(
       FilterActions.setHotelsWithStarFilter.fulfilled,
       (state, action) => {
-        state.searchedHotels = action.payload;
+        state.filteredHotels = action.payload;
       },
     );
   },

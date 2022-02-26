@@ -1,7 +1,7 @@
 import {RootState} from '../../Store';
 
-export const getSearchedHotels = (state: RootState) =>
-  state.FilterSlice.searchedHotels;
+export const getFilteredHotels = (state: RootState) =>
+  state.FilterSlice.filteredHotels;
 
 export const getMaxNumberOfStars = (state: RootState) => {
   const hotels = state.ApiSlice.hotels;

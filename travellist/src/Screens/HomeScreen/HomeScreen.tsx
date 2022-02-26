@@ -10,29 +10,21 @@ import {
 import React, {useLayoutEffect, useCallback, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamListApp} from '@Navigation/Stacks';
-import {
-  useAppDispatch,
-  useAppSelector,
-  ApiSelectors,
-  FilterActions,
-} from '@Storage/Redux';
+import {useAppSelector, ApiSelectors} from '@Storage/Redux';
 import {ApiTypes} from '@Api';
 import {Card, CustomText, FiltersNavIcon, Flex} from '@Components';
-import {useDisplayHotels} from './Hooks/useDisplayHotels';
-import {useFetchHotels} from './Hooks/useFetchHotels';
-import {IHotel} from '@Api/types';
+import {useDisplayHotels, useFetchHotels} from './Hooks';
+import {searchHotels} from './Utils';
 
 type Props = {} & NativeStackScreenProps<RootStackParamListApp, 'Home'>;
 type InputText = NativeSyntheticEvent<TextInputFocusEventData>;
 
 const HomeScreen: React.FC<Props> = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const dispatch = useAppDispatch();
   useFetchHotels();
 
-  // TODO -> DO Search localy on either array (filtered or entire hotel)
   const [isSearching, setIsSearching] = useState(false);
-
+  const [searchedHotels, setSearchedHotels] = useState<ApiTypes.IHotel[]>([]);
   const [hotels, isFilterActive] = useDisplayHotels();
   const isApiError = useAppSelector(ApiSelectors.getApiErrorState);
 
@@ -41,20 +33,19 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
       e.nativeEvent.text.length > 0
         ? setIsSearching(true)
         : setIsSearching(false);
-      dispatch(FilterActions.setSearchedHotels({text: e.nativeEvent.text}));
+
+      // use to strip optioanl boolean type
+      if (typeof hotels === 'boolean') {
+        return;
+      }
+      let foundHotels = searchHotels(hotels, e.nativeEvent.text);
+      setSearchedHotels(foundHotels);
     },
-    [dispatch],
+    [hotels],
   );
 
-  const onBLur = useCallback(
-    () => dispatch(FilterActions.resetFilterState()),
-    [dispatch],
-  );
-
-  const onCancelButtonPress = useCallback(
-    () => dispatch(FilterActions.resetFilterState()),
-    [dispatch],
-  );
+  const onBLur = useCallback(() => setIsSearching(false), []);
+  const onCancelButtonPress = useCallback(() => setIsSearching(false), []);
 
   const onNavigation = useCallback(() => {
     navigation.navigate('Filters');
@@ -100,7 +91,7 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
     <FlatList
       contentContainerStyle={s.Container}
       contentInsetAdjustmentBehavior="automatic"
-      data={hotels as IHotel[]}
+      data={isSearching ? searchedHotels : (hotels as ApiTypes.IHotel[])}
       renderItem={_renderItem}
     />
   );
