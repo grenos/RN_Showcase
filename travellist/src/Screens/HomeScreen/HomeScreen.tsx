@@ -1,11 +1,8 @@
 import {
-  useColorScheme,
   FlatList,
   ListRenderItem,
-  StyleSheet,
   NativeSyntheticEvent,
   TextInputFocusEventData,
-  Platform,
 } from 'react-native';
 import React, {useLayoutEffect, useCallback, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -15,14 +12,13 @@ import {ApiTypes} from '@Api';
 import {Card, CustomText, FiltersNavIcon, Flex} from '@Components';
 import {useDisplayHotels, useFetchHotels} from './Hooks';
 import {searchHotels} from './Utils';
+import {s} from './Styles';
 
 type Props = {} & NativeStackScreenProps<RootStackParamListApp, 'Home'>;
 type InputText = NativeSyntheticEvent<TextInputFocusEventData>;
 
 const HomeScreen: React.FC<Props> = ({navigation}) => {
-  const isDarkMode = useColorScheme() === 'dark';
   useFetchHotels();
-
   const [isSearching, setIsSearching] = useState(false);
   const [searchedHotels, setSearchedHotels] = useState<ApiTypes.IHotel[]>([]);
   const [hotels, isFilterActive] = useDisplayHotels();
@@ -96,12 +92,5 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
     />
   );
 };
-
-const s = StyleSheet.create({
-  Container: {
-    backgroundColor: 'white',
-    paddingBottom: Platform.OS === 'android' ? 30 : 0,
-  },
-});
 
 export default HomeScreen;

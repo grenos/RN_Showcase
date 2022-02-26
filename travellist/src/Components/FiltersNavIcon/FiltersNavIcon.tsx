@@ -1,7 +1,6 @@
 import {TouchableOpacity, View} from 'react-native';
 import React, {memo} from 'react';
-import {CustomIcon} from '@Components/CustomIcon';
-import {ActiveFilterDot} from '@Components/ActiveFilterDot';
+import {CustomIcon, ActiveFilterDot} from '@Components';
 
 type Props = {
   isFilterActive: boolean;

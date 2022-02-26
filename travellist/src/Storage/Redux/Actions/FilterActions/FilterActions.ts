@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import type {RootState} from '../../Store';
-import {ApiTypes} from '@Api/index';
+import {ApiTypes} from '@Api';
 import {FilterSlice} from '../../Reducers/FilterSlice/FilterSlice';
 
 export const setHotelsWithStarFilter = createAsyncThunk<

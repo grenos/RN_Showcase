@@ -1,7 +1,6 @@
 import {StyleProp, StyleSheet, TouchableOpacity, ViewStyle} from 'react-native';
 import React from 'react';
-import {CustomIcon} from '@Components/CustomIcon';
-import {CustomText} from '@Components/CustomText';
+import {CustomIcon, CustomText} from '@Components';
 
 type Props = {
   size: number[];
