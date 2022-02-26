@@ -1,6 +1,7 @@
 import {useAppDispatch, useAppSelector} from './Hooks';
 import {ApiSelectors, FilterSelectors} from './Selectors';
 import {ApiActions, FilterActions} from './Actions';
+import {store} from './Store';
 
 export {
   useAppDispatch,
@@ -9,4 +10,5 @@ export {
   ApiActions,
   FilterActions,
   FilterSelectors,
+  store,
 };

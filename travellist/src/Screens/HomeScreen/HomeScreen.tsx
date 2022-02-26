@@ -5,20 +5,19 @@ import {
   TextInputFocusEventData,
 } from 'react-native';
 import React, {useLayoutEffect, useCallback, useState} from 'react';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamListApp} from '@Navigation/Stacks';
 import {useAppSelector, ApiSelectors} from '@Storage/Redux';
 import {ApiTypes} from '@Api';
 import {Card, CustomText, FiltersNavIcon, Flex} from '@Components';
 import {useDisplayHotels, useFetchHotels} from './Hooks';
 import {searchHotels} from './Utils';
 import {s} from './Styles';
+import {useNavigation} from '@react-navigation/native';
 
-type Props = {} & NativeStackScreenProps<RootStackParamListApp, 'Home'>;
 type InputText = NativeSyntheticEvent<TextInputFocusEventData>;
 
-const HomeScreen: React.FC<Props> = ({navigation}) => {
+const HomeScreen = () => {
   useFetchHotels();
+  const navigation = useNavigation();
   const [isSearching, setIsSearching] = useState(false);
   const [searchedHotels, setSearchedHotels] = useState<ApiTypes.IHotel[]>([]);
   const [hotels, isFilterActive] = useDisplayHotels();

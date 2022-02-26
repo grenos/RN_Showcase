@@ -6,14 +6,12 @@ import {
   useAppDispatch,
   useAppSelector,
 } from '@Storage/Redux';
-import {RootStackParamListApp} from '@Navigation/Stacks';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useNavigation} from '@react-navigation/native';
 import {s} from './Styles';
 
-type Props = {} & NativeStackScreenProps<RootStackParamListApp, 'Filters'>;
-
-const FiltersScreen: React.FC<Props> = ({navigation}) => {
+const FiltersScreen = () => {
   const dispatch = useAppDispatch();
+  const navigation = useNavigation();
   const [numberOfStars, setsetNumberOfStars] = useState(0);
   const maxNumberOfStars = useAppSelector(FilterSelectors.getMaxNumberOfStars);
   const getNumberOfStars = useAppSelector(FilterSelectors.getNumberOfStars);

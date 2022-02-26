@@ -3,9 +3,15 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen, FiltersScreen} from '@Screens';
 
 export type RootStackParamListApp = {
-  Home: undefined;
+  Home: {options: {}};
   Filters: undefined;
 };
+
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamListApp {}
+  }
+}
 
 const Home = createNativeStackNavigator<RootStackParamListApp>();
 
