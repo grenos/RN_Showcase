@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   NativeSyntheticEvent,
   TextInputFocusEventData,
+  Platform,
+  View,
 } from 'react-native';
 import React, {useLayoutEffect, useCallback, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -17,9 +19,10 @@ import {
   FilterActions,
 } from '@Storage/Redux';
 import {ApiTypes} from '@Api';
-import {Card, CustomIcon, CustomText, Flex} from '@Components';
+import {ActiveFilterDot, Card, CustomIcon, CustomText, Flex} from '@Components';
 import {useDisplayHotels} from './Hooks/useDisplayHotels';
 import {useFetchHotels} from './Hooks/useFetchHotels';
+import {IHotel} from '@Api/types';
 
 type Props = {} & NativeStackScreenProps<RootStackParamListApp, 'Home'>;
 type InputText = NativeSyntheticEvent<TextInputFocusEventData>;
@@ -28,8 +31,11 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const dispatch = useAppDispatch();
   useFetchHotels();
+
+  // TODO -> DO Search localy on either array (filtered or entire hotel)
   const [isSearching, setIsSearching] = useState(false);
-  const hotels = useDisplayHotels(isSearching);
+
+  const [hotels, isFilterActive] = useDisplayHotels();
   const isApiError = useAppSelector(ApiSelectors.getApiErrorState);
 
   const onChangeText = useCallback(
@@ -61,12 +67,16 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
         onCancelButtonPress: onCancelButtonPress,
       },
       headerRight: () => (
+        // TODO -> Custom Button
         <TouchableOpacity onPress={() => navigation.navigate('Filters')}>
-          <CustomIcon name="sliders" color="#000" />
+          <View>
+            <CustomIcon name="sliders" color="#000" />
+            {isFilterActive && <ActiveFilterDot />}
+          </View>
         </TouchableOpacity>
       ),
     });
-  }, [navigation, onBLur, onCancelButtonPress, onChangeText]);
+  }, [navigation, onBLur, onCancelButtonPress, onChangeText, isFilterActive]);
 
   const _renderItem: ListRenderItem<ApiTypes.IHotel> = ({item}) => (
     <Card hotel={item} />
@@ -84,7 +94,7 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
     <FlatList
       contentContainerStyle={s.Container}
       contentInsetAdjustmentBehavior="automatic"
-      data={hotels}
+      data={hotels as IHotel[]}
       renderItem={_renderItem}
     />
   );
@@ -93,6 +103,7 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
 const s = StyleSheet.create({
   Container: {
     backgroundColor: 'white',
+    paddingBottom: Platform.OS === 'android' ? 30 : 0,
   },
 });
 

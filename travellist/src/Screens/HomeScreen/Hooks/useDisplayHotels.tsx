@@ -1,7 +1,10 @@
 import {ApiSelectors, useAppSelector, FilterSelectors} from '@Storage/Redux';
 
-export const useDisplayHotels = (isSearching: boolean) => {
+export const useDisplayHotels = () => {
   const hotels = useAppSelector(ApiSelectors.getHotels);
+  const isFilterActive = useAppSelector(FilterSelectors.getIsFilterActive);
   const searchedHotels = useAppSelector(FilterSelectors.getSearchedHotels);
-  return isSearching ? searchedHotels : hotels;
+  return isFilterActive
+    ? [searchedHotels, isFilterActive]
+    : [hotels, isFilterActive];
 };

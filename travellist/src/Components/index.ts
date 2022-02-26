@@ -4,5 +4,14 @@ import {CustomImage} from './CustomImage';
 import {CustomText} from './CustomText';
 import {Card} from './Card';
 import {Flex} from './Flex';
+import {ActiveFilterDot} from './ActiveFilterDot';
 
-export {CustomButton, CustomIcon, CustomImage, CustomText, Card, Flex};
+export {
+  CustomButton,
+  CustomIcon,
+  CustomImage,
+  CustomText,
+  Card,
+  Flex,
+  ActiveFilterDot,
+};

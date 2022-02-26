@@ -12,7 +12,7 @@ type Props = {
 const CustomIcon: React.FC<Props> = ({
   name,
   size = 24,
-  color = '#2bbdde',
+  color = '#d0b51b',
   styles = {},
 }) => {
   return <Icon name={name} size={size} color={color} style={styles} />;
