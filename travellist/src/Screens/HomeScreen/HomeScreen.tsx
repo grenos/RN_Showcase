@@ -3,11 +3,9 @@ import {
   FlatList,
   ListRenderItem,
   StyleSheet,
-  TouchableOpacity,
   NativeSyntheticEvent,
   TextInputFocusEventData,
   Platform,
-  View,
 } from 'react-native';
 import React, {useLayoutEffect, useCallback, useState} from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -19,7 +17,7 @@ import {
   FilterActions,
 } from '@Storage/Redux';
 import {ApiTypes} from '@Api';
-import {ActiveFilterDot, Card, CustomIcon, CustomText, Flex} from '@Components';
+import {Card, CustomText, FiltersNavIcon, Flex} from '@Components';
 import {useDisplayHotels} from './Hooks/useDisplayHotels';
 import {useFetchHotels} from './Hooks/useFetchHotels';
 import {IHotel} from '@Api/types';
@@ -58,6 +56,10 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
     [dispatch],
   );
 
+  const onNavigation = useCallback(() => {
+    navigation.navigate('Filters');
+  }, [navigation]);
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerSearchBarOptions: {
@@ -67,16 +69,20 @@ const HomeScreen: React.FC<Props> = ({navigation}) => {
         onCancelButtonPress: onCancelButtonPress,
       },
       headerRight: () => (
-        // TODO -> Custom Button
-        <TouchableOpacity onPress={() => navigation.navigate('Filters')}>
-          <View>
-            <CustomIcon name="sliders" color="#000" />
-            {isFilterActive && <ActiveFilterDot />}
-          </View>
-        </TouchableOpacity>
+        <FiltersNavIcon
+          isFilterActive={isFilterActive as boolean}
+          action={onNavigation}
+        />
       ),
     });
-  }, [navigation, onBLur, onCancelButtonPress, onChangeText, isFilterActive]);
+  }, [
+    navigation,
+    onBLur,
+    onCancelButtonPress,
+    onChangeText,
+    isFilterActive,
+    onNavigation,
+  ]);
 
   const _renderItem: ListRenderItem<ApiTypes.IHotel> = ({item}) => (
     <Card hotel={item} />

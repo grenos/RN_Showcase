@@ -1,6 +1,5 @@
-import {Text, TouchableOpacity} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
-import {CustomIcon, CustomText, Flex} from '@Components';
+import {CustomButton, CustomText, Flex} from '@Components';
 import {
   FilterActions,
   FilterSelectors,
@@ -9,6 +8,7 @@ import {
 } from '@Storage/Redux';
 import {RootStackParamListApp} from '@Navigation/Stacks';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {s} from './Styles';
 
 type Props = {} & NativeStackScreenProps<RootStackParamListApp, 'Filters'>;
 
@@ -30,14 +30,14 @@ const FiltersScreen: React.FC<Props> = ({navigation}) => {
     let stars: JSX.Element[] = [];
     for (let i = 0; i < maxNumberOfStars; i++) {
       let star = (
-        // TODO -> Custom Button
-        <TouchableOpacity onPress={() => onFilterOnStars(i)} key={i}>
-          <CustomIcon
-            name="star"
-            size={28}
-            color={numberOfStars > i ? '#d0b51b' : 'black'}
-          />
-        </TouchableOpacity>
+        <CustomButton
+          key={i}
+          isIcon
+          icon="star"
+          iconColor={numberOfStars > i ? '#d0b51b' : 'black'}
+          size={[28]}
+          action={() => onFilterOnStars(i)}
+        />
       );
       stars.push(star);
     }
@@ -59,16 +59,13 @@ const FiltersScreen: React.FC<Props> = ({navigation}) => {
   };
 
   return (
-    <Flex
-      flexGrow={1}
-      justify="flex-start"
-      align="flex-start"
-      styles={{padding: 20}}>
-      <Flex align="flex-end" styles={{width: '100%', paddingBottom: 30}}>
-        {/* // TODO -> Custom Button */}
-        <TouchableOpacity onPress={onResetFilters}>
-          <CustomText title>Reset Filters</CustomText>
-        </TouchableOpacity>
+    <Flex flexGrow={1} justify="flex-start" align="flex-start" styles={s.pd20}>
+      <Flex align="flex-end" styles={[s.fullWidth, s.pdBottom30]}>
+        <CustomButton
+          size={[120, 40]}
+          title="Reset Filters"
+          action={onResetFilters}
+        />
       </Flex>
 
       <CustomText title color="gray">
@@ -78,7 +75,7 @@ const FiltersScreen: React.FC<Props> = ({navigation}) => {
       <Flex
         direction="row"
         justify="space-evenly"
-        styles={{width: '100%', paddingTop: 20}}>
+        styles={[s.fullWidth, s.pdTop20]}>
         {_renderStars()}
       </Flex>
 
@@ -87,11 +84,13 @@ const FiltersScreen: React.FC<Props> = ({navigation}) => {
         justify="flex-end"
         align="center"
         flexGrow={1}
-        styles={{width: '100%'}}>
-        {/* // TODO -> Custom Button */}
-        <TouchableOpacity onPress={onFilterPress}>
-          <Text>Press ME</Text>
-        </TouchableOpacity>
+        styles={s.fullWidth}>
+        <CustomButton
+          size={[240, 52]}
+          title="Search Hotels"
+          styles={s.searchButton}
+          action={onFilterPress}
+        />
       </Flex>
     </Flex>
   );
