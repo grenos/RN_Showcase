@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import {ApiTypes} from '@Api';
 import {ApiActions} from '../../Actions';
 
-interface ApiState {
+export interface ApiState {
   hotels: ApiTypes.IHotel[];
   error?: string;
   loading: boolean;
@@ -13,7 +13,7 @@ const initialState: ApiState = {
   hotels: [],
   error: '',
   loading: false,
-  currentRequestId: '',
+  currentRequestId: undefined,
 };
 
 export const ApiSlice = createSlice({

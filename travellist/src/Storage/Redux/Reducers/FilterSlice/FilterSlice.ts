@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import {ApiTypes} from '@Api';
 import {FilterActions} from '../../Actions';
 
-interface FilterState {
+export interface FilterState {
   filteredHotels: ApiTypes.IHotel[];
   starsToFilter: number;
   isFlterActive: boolean;

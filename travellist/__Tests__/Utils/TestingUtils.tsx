@@ -22,12 +22,3 @@ export * from '@testing-library/react-native';
 
 // override render method
 export {customRender as render};
-
-// const createTestProps = () => ({
-//   setOptions: jest.fn(),
-//   route: jest.fn(),
-// });
-// let props: any;
-// beforeEach(() => {
-//   props = createTestProps();
-// });
