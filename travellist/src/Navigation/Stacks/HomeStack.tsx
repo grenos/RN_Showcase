@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {HomeScreen, FiltersScreen} from '@Screens';
 
 export type RootStackParamListApp = {
-  Home: {options: {}};
+  Home: undefined;
   Filters: undefined;
 };
 

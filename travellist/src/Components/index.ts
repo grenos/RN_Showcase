@@ -6,6 +6,7 @@ import {Card} from './Card';
 import {Flex} from './Flex';
 import {ActiveFilterDot} from './ActiveFilterDot';
 import {FiltersNavIcon} from './FiltersNavIcon';
+import {CardList} from './CardList';
 
 export {
   CustomButton,
@@ -16,4 +17,5 @@ export {
   Flex,
   ActiveFilterDot,
   FiltersNavIcon,
+  CardList,
 };

@@ -1,8 +1,8 @@
 import React from 'react';
+import numbro from 'numbro';
 import {ApiTypes} from '@Api';
 import {Flex, CustomImage, CustomText, CustomIcon} from '@Components';
 import {currencyForamttingOptions} from '@Utils/General';
-import numbro from 'numbro';
 import {s} from './Styles';
 
 type Props = {
